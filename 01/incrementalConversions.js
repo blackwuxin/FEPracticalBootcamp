@@ -4,13 +4,18 @@ function Decimal10to64(num){
         console.log(`${num} input value must been number type`);
         return null;
     }
+    let symbol = '';
+    if(num < 0){
+        symbol = '-';
+        num = Math.abs(num);
+    }
     let arr = [0,1,2,3,4,5,6,7,8,9,
         'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
         'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
         '~','!'
     ];
     let arr2 = []
-    let integer = num;
+    let integer =  num;
     let fractional = num - parseInt(num);
     if(fractional !== 0 ){
         integer = parseInt(num)
@@ -27,7 +32,7 @@ function Decimal10to64(num){
             break;
         }
     }
-    let result1 = arr2.reverse().join('');
+    let result1 = symbol + arr2.reverse().join('');
     if(fractional === 0){
         console.log(num,result1)
         return result1;
@@ -49,7 +54,7 @@ function Decimal10to64(num){
         }
     }
     let result2 = arr3.join('');
-    console.log(`${num} ${result1}.${result2}`)
+    console.log(`${symbol}${num} ${result1}.${result2}`)
     return `${result1}.${result2}`;
 }
 
@@ -70,6 +75,6 @@ Decimal10to64(9.1);
 Decimal10to64(10.22);
 Decimal10to64(36.333);
 
-Decimal10to64('abcd');
+Decimal10to64(-123.45);
 
 
