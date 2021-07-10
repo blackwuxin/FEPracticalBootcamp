@@ -35,7 +35,7 @@ function Decimal10to64(num){
     let arr3 = [];
     let i = 0;
     let temp = fractional;
-    //小数为保留10位精度
+    //小数位保留10位精度
     while(true){
         let temp1 =  temp * 64;
         let temp2 = parseInt(temp1);
