@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <input type="file" id="loadFile" />
+        <img src="" id="stuPic" />
+        <canvas id="canvas"></canvas>
+        <script>
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+            function grey(image) {
+                var imagedata = context.getImageData(
+                    0,
+                    0,
+                    image.width,
+                    image.height
+                );
+                var imagedata1 = context.createImageData(
+                    image.width,
+                    image.height
+                );
+                var pix = imagedata.data;
+                for (var i = 0, n = pix.length; i < n; i += 4) {
+                    var grayscale =
+                        pix[i] * 0.3 + pix[i + 1] * 0.59 + pix[i + 2] * 0.11;
+                    pix[i] = grayscale; // red
+                    pix[i + 1] = grayscale; // green
+                    pix[i + 2] = grayscale; // blue
+                    // alpha
+                }
+                context.putImageData(imagedata, 0, 0);
+            }
+            function download(){
+                var dataImg = new Image();
+                dataImg.src = canvas.toDataURL("image/png");
+                var alink = document.createElement("a");
+                alink.href = dataImg.src;
+                alink.download = "image";
+                document.body.appendChild(alink);
+                alink.click();
+            }
+            var image = document.getElementById("stuPic");
+            image.onload = function (e) {
+                context.drawImage(this, 0, 0);
+                grey(this);
+                download()
+            };
+            document
+                .getElementById("loadFile")
+                .addEventListener("change", function (e) {
+                    var file = e.target.files[0];
+                    var fReader = new FileReader();
+                    fReader.readAsDataURL(file);
+                    fReader.onload = function (e) {
+                        image.setAttribute("src", e.target.result);
+                    };
+                });
+        </script>
+    </body>
+</html>
