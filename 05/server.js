@@ -4,7 +4,7 @@ var express = require("express");
 const { execSync } = require('child_process')
 var app = express();
 
-// Serve up content from public directory
+
 app.use(express.static(path.join(__dirname, "dist")));
 app.post('/build', function(request, response) {
   let postData = ''
