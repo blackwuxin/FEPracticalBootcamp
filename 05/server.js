@@ -1,22 +1,3 @@
-// const http = require('http')
-
-
-// http
-//   .createServer((request, response) => {
-//     console.log(request.url)
-//     if (request.url === '/build') {
-//       return build(request, response)
-//     }
-//   })
-//   .listen(3000)
-
-
-// function build(request, response) {
-  
-// }
-
-
-
 const path = require('path')
 const fs = require('fs')
 var express = require("express");
