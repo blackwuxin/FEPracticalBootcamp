@@ -14,7 +14,7 @@ import { data } from './data';
 let temp = data['T1348647853363'];
 let template = ``;
 temp.forEach(element => {
-  template += `<li onclick="push('/vue/?posid=${element.postid}')" date-id='${element.postid}'>${element.title}</li>`;
+  template += `<li onclick="push('/vue/?postid=${element.postid}')" date-id='${element.postid}'>${element.title}</li>`;
 });
 
 document.getElementById('sidemenu').innerHTML = template;
