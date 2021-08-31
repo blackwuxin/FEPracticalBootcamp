@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>Streamer</title>
+</head>
+<body>
+    <video width="500" height="500"  id='vedio1' autoplay></video>
+    <video width="500" height="500" id='vedio2' autoplay></video>
+
+    <script>
+        // get video dom element
+        const video = document.getElementById('vedio1');
+        const video2 =  document.getElementById('vedio2');
+        
+        // request access to webcam
+        navigator.mediaDevices.getUserMedia({video: true }).then((stream) => video.srcObject = stream);
+        navigator.mediaDevices.getDisplayMedia({
+            video: {
+            cursor: 'always'
+            },
+            audio: true,
+        }).then((stream)=> video2.srcObject = stream);
+        // returns a frame encoded in base64
+        const getFrame = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            const data = canvas.toDataURL('image/png');
+            return data;
+        }
+        const getFrame2 = () => {
+            let canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;;
+            canvas.height = video.videoHeight;;
+            canvas.getContext('2d').drawImage(video2, 0, 0);
+            const data = canvas.toDataURL('image/png');
+            return data;
+        }
+        const WS_URL = location.origin.replace(/^http/, 'ws');
+        const ws = new WebSocket(WS_URL);
+        ws.onopen = () => {
+            console.log(`Connected to ${WS_URL}`);
+            function send(){
+                ws.send(JSON.stringify({'type':'vedio',data:getFrame()}));
+                ws.send(JSON.stringify({'type':'screenshot',data:getFrame2()}));
+                window.requestAnimationFrame(send);
+            }
+            window.requestAnimationFrame(send);
+        }
+    </script>
+</body>
+</html>
