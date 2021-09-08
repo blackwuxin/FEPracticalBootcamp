@@ -1,6 +1,6 @@
 <template>
-  <el-container>
-    <el-aside width="200px">
+  <el-container style="border: 1px solid #eee">
+   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
       <comp-list @compClone="compClone" />
     </el-aside>
     <el-main>
@@ -32,8 +32,5 @@ export default {
 * {
   margin: 0;
   padding: 0;
-}
-.el-container {
-  height: 100vh;
 }
 </style>

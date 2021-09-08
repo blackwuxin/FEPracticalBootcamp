@@ -8,15 +8,16 @@
       :group="{ name: 'comp', pull: 'clone', put: 'false' }"
       :clone="clone"
     >
-      <div class="item" v-for="comp in compList" :key="comp.compName">{{ comp.label }}</div>
+      <div class="item" v-for="comp in compList" :key="comp.compName">
+        {{ comp.label }}
+      </div>
     </draggable>
   </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable';
-import { v4 as uuidv4 } from 'uuid';
-import compProp from './defaultProp';
+import draggable from "vuedraggable";
+import { v4 as uuidv4 } from "uuid";
 export default {
   components: {
     draggable,
@@ -25,20 +26,20 @@ export default {
     return {
       compList: [
         {
-          label: '输入框',
-          compName: 'el-input',
+          label: "输入框",
+          compName: "el-input",
         },
         {
-          label: '下拉框',
-          compName: 'el-select',
+          label: "下拉框",
+          compName: "el-select",
         },
         {
-          label: '单选',
-          compName: 'el-radio-group',
+          label: "单选",
+          compName: "el-radio",
         },
         {
-          label: '多选',
-          compName: 'el-checkbox-group',
+          label: "多选",
+          compName: "el-checkbox",
         },
       ],
     };
@@ -46,7 +47,7 @@ export default {
   methods: {
     clone(obj) {
       let id = uuidv4();
-      return { ...obj, id, ...compProp[obj.compName], field: id.substr(0, 8) };
+      return { ...obj, id };
     },
   },
 };
@@ -56,10 +57,10 @@ export default {
 .container {
   padding: 20px;
 }
-  .item {
-            padding: 6px 12px;
-            margin: 0px 10px 0px 10px;
-            border: solid 1px #eee;
-            background-color: #f1f1f1;
-        }
+.item {
+  padding: 6px 12px;
+  margin: 0px 10px 0px 10px;
+  border: solid 1px #eee;
+  background-color: #f1f1f1;
+}
 </style>
