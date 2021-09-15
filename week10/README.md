@@ -3,4 +3,4 @@
 
 
 ## 启动
-yarn && cd examples && yarn && yarn dev
+cd element-plus && yarn && cd examples && yarn && yarn dev
